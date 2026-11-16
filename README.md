@@ -1,33 +1,20 @@
 # Notehouse
 
-A personal OneNote-style web app. It imports notebook, section, and page content from Microsoft OneNote, then keeps the imported notes in this browser's IndexedDB. Edits stay local and are not written back to OneNote. No notebook content or API keys are included in this repository.
+A standalone, OneNote-style web app hosted on GitHub Pages. It does not connect to a Microsoft account or sync edits back to OneNote. Import a local OneNote export to bring its notes into this workspace.
 
-## Run on GitHub Pages
+## Use the app
 
-1. In this repository, open **Settings → Pages**.
-2. Under **Build and deployment**, choose **Deploy from a branch**.
-3. Select branch **main** and folder **/(root)**, then save.
-4. Open `https://l2practice.github.io/note-text/` after GitHub Pages finishes publishing.
+Open [https://l2practice.github.io/note-text/](https://l2practice.github.io/note-text/) and choose **Import OneNote file**. The importer accepts `.onepkg`, `.one`, and `.onetoc2` files. In OneNote desktop, export a notebook as a OneNote Package (`.onepkg`) first, then select that file in the web app.
 
-## Enable OneNote import
+The OneNote parser runs in the browser. The selected notebook file is not uploaded to this repository or to a Notehouse server. The app loads its parser library from esm.sh when importing, so an internet connection is needed for that step. Conversion extracts readable note content into sections and pages; OneNote-specific layout, handwriting, embedded objects, and some formatting may not be preserved exactly.
 
-1. Open the Microsoft Entra admin center and register a single-page application. Select the account type that includes your Microsoft account.
-2. Under **Authentication → Add a platform → Single-page application**, add this exact redirect URI: `https://l2practice.github.io/note-text/`.
-3. Under **API permissions**, add **Microsoft Graph → Delegated permissions → Notes.Read**. The app only requests read access.
-4. Copy **Application (client) ID** from the app registration overview.
-5. In Notehouse, open **Settings**, paste the client ID, save, then choose **Import from OneNote** and sign in.
+## Storage and privacy
 
-Microsoft's `Notes.Read` delegated permission lets the signed-in user authorize reading OneNote notebooks. Work or school accounts may be subject to their organization's consent policy.
+- Notes and edits are stored in this browser's IndexedDB, with local storage as a fallback. They are available on this browser and device only. Clearing this site's browser data can delete them.
+- There is no Google Drive or Microsoft account sign-in in this standalone version.
+- Gemini chat is optional. Add your own Gemini API key in **Settings**. The key stays in this browser; when you use chat, your prompt and current page text are sent to Google's Gemini API.
+- Keep a separate backup of important notes. GitHub Pages hosts the app files, not each user's notes.
 
-## Data and privacy
+## Publish
 
-- Imported notes and edits are stored in this browser on this device. Clearing browser site data removes them.
-- The Microsoft client ID and optional Gemini key are saved in browser local storage; no client secret belongs in this public repository.
-- If Gemini is enabled, prompts and the current page text are sent to the Gemini API using the key you provide.
-- Microsoft Graph is used to read notebooks directly after you sign in. This app does not send notebook data to a Notehouse server.
-
-## Limits
-
-- This is a static, single-user app, not a multi-user service.
-- Some OneNote-specific objects or formatting may not render exactly like OneNote.
-- The app does not sync edits back to OneNote and does not generate `.onepkg` files.
+This repository is configured for GitHub Pages from the `main` branch and repository root. The app is a static `index.html`; changes pushed to `main` are published by GitHub Pages.
