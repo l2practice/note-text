@@ -8,12 +8,13 @@ Open [https://l2practice.github.io/note-text/](https://l2practice.github.io/note
 
 The OneNote parser runs in the browser. The selected notebook file is not uploaded to this repository or to a Notehouse server. The app loads its parser library from esm.sh when importing, so an internet connection is needed for that step. Conversion extracts readable note content into sections and pages; OneNote-specific layout, handwriting, embedded objects, and some formatting may not be preserved exactly.
 
-## Storage and privacy
+## Google Drive sync
 
-- Notes and edits are stored in this browser's IndexedDB, with local storage as a fallback. They are available on this browser and device only. Clearing this site's browser data can delete them.
-- There is no Google Drive or Microsoft account sign-in in this standalone version.
-- Gemini chat is optional. Add your own Gemini API key in **Settings**. The key stays in this browser; when you use chat, your prompt and current page text are sent to Google's Gemini API.
-- Keep a separate backup of important notes. GitHub Pages hosts the app files, not each user's notes.
+Notehouse stores its own `Notehouse/notehouse-notebooks.json` file in each signed-in user's Google Drive. It uses the same OAuth client ID and `nt-worker` Apps Script token-keeper settings as `/notes` on this domain, so an existing **Always-on connection** there is reused automatically. Both apps run under `https://l2practice.github.io`, which lets them share this browser's connection settings. The notebook contents are separate from Notes' PDF library.
+
+When the token keeper is configured and linked, Notehouse requests a fresh short-lived Drive access token in the background and checks Drive for changes about once a minute. Without the token keeper, direct Google sign-in works for the current OAuth access-token period. For automatic renewal beyond an hour, configure the Notes app's **Settings → Always-on connection** once. In Notehouse, the token keeper URL and private key can also be entered under **Settings → Always-on connection settings**. Each person should use their own Apps Script token keeper and Google account; the refresh token stays in that person's Apps Script properties, not in this app or repository. The setup guide and Apps Script source are linked from the app settings.
+
+Notes are also cached in this browser for offline use. Drive sync is per Google account; opening the app on another device with the same connected account loads the same notebook file. Gemini chat is optional. Add your own Gemini API key in **Settings**; the key stays in this browser, while prompts and current page text are sent to Google's Gemini API when used.
 
 ## Publish
 
