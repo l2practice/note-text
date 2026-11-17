@@ -18,6 +18,8 @@ When the token keeper is configured and linked, Notehouse requests a fresh short
 
 Notes are also cached in this browser for offline use. Drive sync is per Google account; opening the app on another device with the same connected account loads the same notebook file. Gemini chat is optional. Add your own Gemini API key in **Settings**; the key stays in this browser, while prompts and current page text are sent to Google's Gemini API when used.
 
+Audio transcription also uses the saved Gemini key and sends the selected audio clip or microphone recording to Google's Gemini API. Dictation uses the browser's speech recognition support when available.
+
 ## Publish
 
 This repository is configured for GitHub Pages from the `main` branch and repository root. The app is a static `index.html`; changes pushed to `main` are published by GitHub Pages.
