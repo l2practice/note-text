@@ -8,6 +8,8 @@ Open [https://l2practice.github.io/note-text/](https://l2practice.github.io/note
 
 The importers run in the browser. Selected files are not uploaded to this repository or to a Notehouse server. Importing Markdown ZIPs loads JSZip, Marked and DOMPurify from esm.sh, so an internet connection is needed for that step. Images and linked attachments are embedded in imported page data. The direct OneNote parser extracts readable note content into sections and pages; OneNote-specific layout, handwriting, embedded objects, and some formatting may not be preserved exactly.
 
+The menu bar groups document, edit, view, insert, formatting, tools, Gemini, window, and help commands. The NotePro SVG icon pack is embedded in `index.html`, so the icons do not require separate asset hosting. Browser-controlled actions such as minimizing or arranging windows use the browser/operating-system window controls.
+
 ## Google Drive sync
 
 Notehouse stores its own `Notehouse/notehouse-notebooks.json` file in each signed-in user's Google Drive. It uses the same OAuth client ID and `nt-worker` Apps Script token-keeper settings as `/notes` on this domain, so an existing **Always-on connection** there is reused automatically. Both apps run under `https://l2practice.github.io`, which lets them share this browser's connection settings. The notebook contents are separate from Notes' PDF library.
